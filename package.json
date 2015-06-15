@@ -38,6 +38,6 @@
   "dependencies": {
     "babelify": "^6.0.1",
     "cssify": "^0.7.0",
-    "famous": "git+ssh://git@github.com/alexanderGugel/engine#fix-rebase"
+    "famous": "git+ssh://git@github.com/DnMllr/engine#feature-systems"
   }
 }

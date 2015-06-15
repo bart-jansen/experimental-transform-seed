@@ -4,10 +4,8 @@ var DOMElement = require('famous/dom-renderables/DOMElement');
 var FamousEngine = require('famous/core/FamousEngine');
 var Rotation = require('famous/components/rotation');
 var paddingSize = 5;
-var rows = 20;
-var cols = 20;
-
-FamousEngine.init();
+var rows = 30;
+var cols = 30;
 
 var container = FamousEngine.createScene();
 
@@ -22,12 +20,21 @@ for (let c = 0; c < cols; c++) {
 
         el.setAlign(c / cols, r / rows)
             .setProportionalSize(1 / cols, 1 /rows)
-            .setDifferentialSize(-paddingSize, -paddingSize)
+            // .setDifferentialSize(-paddingSize, -paddingSize)
 
-        el.rotation = new Rotation(el);
-        el.rotation.setZ(Math.PI*40, {duration: 12e4});
-
-
-        // els.push(el);
+        els.push(el);
     }
 }
+
+var spinner = container.addComponent({
+    onUpdate: function(time) {
+        els.forEach(function(el) {
+            el.setRotation(0, 0, time / 1000);
+        });
+
+        container.requestUpdateOnNextTick(spinner);
+    }
+});
+
+container.requestUpdate(spinner);
+FamousEngine.init();
